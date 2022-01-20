@@ -1,4 +1,5 @@
-############################################################### 
+## Simulation of Circuit with Current Dependent Voltage Source
+
 import  PySpice.Logging.Logging as Logging
 logger = Logging.setup_logging()
 
