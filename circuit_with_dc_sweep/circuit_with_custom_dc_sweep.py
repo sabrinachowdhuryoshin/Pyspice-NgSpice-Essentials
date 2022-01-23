@@ -26,6 +26,9 @@ circuit.V('i', 'imaginary', circuit.gnd, 10@u_V) # the voltage source i is conne
 circuit.R(1, 2, circuit.gnd, 1@u_kOhm)
 circuit.Diode(1, 1, 2, model='MyDiode')
 
+circuit.B('BS', 1, circuit.gnd, v="v(imaginary)")
+
+
 # print the circuit:
 print("\nThe Circuit/Netlist: \n", circuit)
 
