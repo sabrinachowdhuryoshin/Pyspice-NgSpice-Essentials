@@ -20,17 +20,19 @@ def format_output(analysis):
     output voltage value array. 
     This provides a more manageable format.
     '''
-# create dictionary
-sim_res_dict = {}
+    # create dictionary
+    sim_res_dict = {}
 
-# loop through each nodes
-for node in analysis.nodes.values():
+    # loop through each nodes
+    for node in analysis.nodes.values():
 
         # extract node name
         data_label = "%s" % str(node)
 
         # save node value/ array of values
         sim_res_dict[data_label] = np.array(node)
+
+    return sim_res_dict
 
 # create the circuit
 circuit = Circuit('Voltage Divider')
