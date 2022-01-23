@@ -33,13 +33,13 @@ analysis = simulator.operating_point()
 
 # print the result
 print(analysis)
-
+print(analysis.nodes['in'])
+print(float(analysis.nodes['in']))
 exit()
 
 
 
-print(analysis.nodes['in'])
-print(float(analysis.nodes['in']))
+
 
 
 
