@@ -2,8 +2,8 @@ Circuit: * C:\Users\nx018023\OneDrive - Nexperia\Documents\GitHub\test_with_pysp
 
 .OP point found by inspection.
 
-Date: Sun Jan 23 20:03:36 2022
-Total elapsed time: 0.093 seconds.
+Date: Sun Jan 23 21:07:33 2022
+Total elapsed time: 0.080 seconds.
 
 tnom = 27
 temp = 27
@@ -13,9 +13,9 @@ traniter = 0
 tranpoints = 0
 accept = 0
 rejected = 0
-matrix size = 5
+matrix size = 6
 fillins = 0
 solver = Alternate
-Matrix Compiler1:       9 opcodes  0.0/[0.0]/0.0
-Matrix Compiler2: 363 bytes object code size  0.0/0.1/[0.0]
+Matrix Compiler1: 254 bytes object code size  0.1/0.1/[0.1]
+Matrix Compiler2: 446 bytes object code size  0.1/0.1/[0.1]
 

@@ -1,9 +1,9 @@
 * C:\Users\nx018023\OneDrive - Nexperia\Documents\GitHub\test_with_pyspice_ngspice\circuit_with_diode\circuit_with_diode.asc
 V1 1 0 10
-R2 1 2 9K
-R1 3 0 1K
+R1 1 2 9K
+R2 3 0 1K
 D2 2 3 MyDiode
-D1 3 0 D
+D1 3 0 MyDiode
 .model D D
 .lib C:\Users\nx018023\OneDrive - Nexperia\Documents\LTspiceXVII\lib\cmp\standard.dio
 .model MyDiode D(Is=4.352n Rs=0.6458 BV=110 IBV=0.0001 N=1.906)
