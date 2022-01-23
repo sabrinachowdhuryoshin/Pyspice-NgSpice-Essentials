@@ -41,3 +41,5 @@ print("Node:", str(analysis["1"]), np.array(analysis["1"]))
 print("Node:", str(analysis["2"]), np.array(analysis["2"]))
 
 # plot graph
+fig = plt.figure()
+plt.plot(np.array(analysis["1"]), np.array(analysis["2"]))
