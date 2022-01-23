@@ -1,4 +1,4 @@
-* C:\Users\nx018023\OneDrive - Nexperia\Documents\GitHub\test_with_pyspice_ngspice\circuit_with_dc_sweep.asc
+* C:\Users\nx018023\OneDrive - Nexperia\Documents\GitHub\test_with_pyspice_ngspice\circuit_with_dc_sweep\circuit_with_dc_sweep.asc
 V1 1 0 10
 R1 2 0 1K
 D1 1 2 MyDiode
