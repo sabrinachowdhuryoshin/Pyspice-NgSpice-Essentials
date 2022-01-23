@@ -33,3 +33,7 @@ def format_output(analysis):
         sim_res_dict[data_label] = np.array(node)
 
     return sim_res_dict
+
+############################################################
+# # Make a Circuit with a Diode # #
+############################################################
