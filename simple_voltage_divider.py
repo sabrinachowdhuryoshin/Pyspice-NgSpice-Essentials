@@ -11,5 +11,11 @@ from PySpice.Unit import *
 
 logger = Logging.setup_logging()
 
+# create the circuit
+circuit = Circuit('Voltage Divider')
+
+# add components to the circuit
+circuit.V('input', 'in', circuit.gnd, 10@u_V)
+
 
 
