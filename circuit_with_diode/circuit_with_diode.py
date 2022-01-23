@@ -37,3 +37,6 @@ def format_output(analysis):
 ############################################################
 # # Make a Circuit with a Diode # #
 ############################################################
+
+# create the circuit
+circuit = Circuit('My Circuit')
