@@ -11,31 +11,8 @@ from PySpice.Unit import *
 
 logger = Logging.setup_logging()
 
-# function
-
-def format_output(analysis):
-    '''
-    Gets dictionary containing SPICE sim values.
-    The dictionary is created by pairing each of the nodes to its corresponding 
-    output voltage value array. 
-    This provides a more manageable format.
-    '''
-    # create dictionary
-    sim_res_dict = {}
-
-    # loop through each nodes
-    for node in analysis.nodes.values():
-
-        # extract node name
-        data_label = "%s" % str(node)
-
-        # save node value/ array of values
-        sim_res_dict[data_label] = np.array(node)
-
-    return sim_res_dict
-
 ############################################################
-# # Make a Circuit with a Diode # #
+# # Make a Circuit with DC Sweep # #
 ############################################################
 
 # create the circuit
@@ -58,12 +35,9 @@ simulator = circuit.simulator(temperature=25, nominal_temperature=25)
 # print the circuit + simulator details:
 print("The Simulator: \n", simulator)
 
-# run analysis
+# run DC sweep analysis
 analysis = simulator.dc(Vinput=slice(0, 5, 0.1))
-
 print("Node:", str(analysis["1"]), np.array(analysis["1"]))
 print("Node:", str(analysis["2"]), np.array(analysis["2"]))
 
-
-# out_dict = format_output(analysis)
-# print(out_dict)
+# plot graph
