@@ -42,8 +42,8 @@ class MySubCir(SubCircuit):
     def __init__(self, name, r=1@u_kOhm): # here r value is default
 
         SubCircuit.__init__(self, name, *self.__nodes__)
-        circuit.R(1, 't_in', 't_out', r)
-        circuit.Diode(1, 't_in', 't_out', model='MyDiode')
+        self.R(2, 't_in', 't_out', r)
+        self.Diode(1, 't_in', 't_out', model='MyDiode')
         
         return
 
@@ -64,12 +64,12 @@ circuit.model('MyDiode', 'D', IS=4.352@u_nA, RS=0.6458@u_Ohm, BV=110@u_V, IBV=0.
 # add components to the circuit
 circuit.V('input', 1, circuit.gnd, 10@u_V)
 circuit.R(1, 1, 2, 9@u_kOhm)
-circuit.R(2, 3, circuit.gnd, 1@u_kOhm)
-circuit.Diode(1, 2, 3, model='MyDiode')
-circuit.Diode(2, 3, circuit.gnd, model='MyDiode')
+circuit.Diode(2, 2, 3, model='MyDiode')
+circuit.subcircuit(MySubCir('sub1', r=1@u_kOhm))
+circuit.X(1, 'sub1', 3, circuit.gnd)
 
-# print the circuit:
-print("\nThe Circuit/Netlist: \n", circuit)
+# # print the circuit:
+# print("\nThe Circuit/Netlist: \n", circuit)
 
 # create a simulator object (with parameters e.g temp)
 simulator = circuit.simulator(temperature=25, nominal_temperature=25)
