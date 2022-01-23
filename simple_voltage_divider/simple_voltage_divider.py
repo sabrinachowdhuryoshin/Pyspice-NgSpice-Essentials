@@ -11,6 +11,27 @@ from PySpice.Unit import *
 
 logger = Logging.setup_logging()
 
+# function
+
+def format_output(analysis):
+    '''
+    Gets dictionary containing SPICE sim values.
+    The dictionary is created by pairing each of the nodes to its corresponding 
+    output voltage value array. 
+    This provides a more manageable format.
+    '''
+# create dictionary
+sim_res_dict = {}
+
+# loop through each nodes
+for node in analysis.nodes.values():
+
+        # extract node name
+        data_label = "%s" % str(node)
+
+        # save node value/ array of values
+        sim_res_dict[data_label] = np.array(node)
+
 # create the circuit
 circuit = Circuit('Voltage Divider')
 
@@ -31,22 +52,6 @@ print("The Simulator: \n", simulator)
 # run analysis
 analysis = simulator.operating_point()
 
-# print the result
-print(analysis)
-
-# print the node's string name
-print(analysis.nodes['in'])
-
-# print the node's float value
-print(float(analysis.nodes['in']))
-
-# print the node's string name
-print(analysis.nodes['out'])
-
-# print the node's float value
-print(float(analysis.nodes['out']))
-
-exit()
 
 
 
