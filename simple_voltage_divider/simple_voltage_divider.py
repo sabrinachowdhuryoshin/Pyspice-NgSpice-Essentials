@@ -23,7 +23,7 @@ circuit.R(2, 'out', circuit.gnd, 1@u_kOhm)
 simulator = circuit.simulator(temperature=25, nominal_temperature=25)
 
 # print the circuit:
-print("The Circuit/Netlist: \n\n", circuit)
+print("\nThe Circuit/Netlist: \n", circuit)
 
 exit()
 
