@@ -1,0 +1,7 @@
+* C:\Users\nx018023\OneDrive - Nexperia\Documents\GitHub\test_with_pyspice_ngspice\simple_voltage_divider.asc
+V1 in 0 10
+R2 out 0 1K
+R1 out in 9K
+.op
+.backanno
+.end
