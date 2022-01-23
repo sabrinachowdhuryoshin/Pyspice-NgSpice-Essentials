@@ -42,7 +42,7 @@ class MySubCir(SubCircuit):
     def __init__(self, name, r=1@u_kOhm): # here r value is default
 
         SubCircuit.__init__(self, name, *self.__nodes__)
-        self.R(2, 't_in', 't_out', r)
+        self.R(1, 't_in', 't_out', r)
         self.Diode(1, 't_in', 't_out', model='MyDiode')
         
         return
