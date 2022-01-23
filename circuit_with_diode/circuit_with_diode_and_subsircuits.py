@@ -6,7 +6,7 @@ import sys
 
 import PySpice
 import PySpice.Logging.Logging as Logging
-from PySpice.Spice.Netlist import Circuit
+from PySpice.Spice.Netlist import Circuit, SubCircuit, SubCircuitFactory
 from PySpice.Unit import *
 
 logger = Logging.setup_logging()
@@ -33,6 +33,23 @@ def format_output(analysis):
         sim_res_dict[data_label] = np.array(node)
 
     return sim_res_dict
+
+# build the subcircuit class
+
+class MySubCir(SubCircuit):
+
+    __nodes__ = ('t_in', 't_out')
+    def __init__(self, name, r=1@u_kOhm): # here r value is default
+
+        SubCircuit.__init__(self, name, *self.__nodes__)
+        circuit.R(1, 't_in', 't_out', r)
+        circuit.Diode(1, 't_in', 't_out', model='MyDiode')
+        
+        return
+
+
+
+
 
 ############################################################
 # # Make a Circuit with a Diode # #
