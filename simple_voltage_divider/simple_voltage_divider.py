@@ -33,8 +33,19 @@ analysis = simulator.operating_point()
 
 # print the result
 print(analysis)
+
+# print the node's string name
 print(analysis.nodes['in'])
+
+# print the node's float value
 print(float(analysis.nodes['in']))
+
+# print the node's string name
+print(analysis.nodes['out'])
+
+# print the node's float value
+print(float(analysis.nodes['out']))
+
 exit()
 
 
