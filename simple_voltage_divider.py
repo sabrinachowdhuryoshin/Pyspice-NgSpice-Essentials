@@ -1,3 +1,5 @@
+## Simulation of a Simple Voltage Divider Circuit
+
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
