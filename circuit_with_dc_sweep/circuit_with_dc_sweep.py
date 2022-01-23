@@ -46,10 +46,8 @@ circuit.model('MyDiode', 'D', IS=4.352@u_nA, RS=0.6458@u_Ohm, BV=110@u_V, IBV=0.
 
 # add components to the circuit
 circuit.V('input', 1, circuit.gnd, 10@u_V)
-circuit.R(1, 1, 2, 9@u_kOhm)
-circuit.R(2, 3, circuit.gnd, 1@u_kOhm)
-circuit.Diode(1, 2, 3, model='MyDiode')
-circuit.Diode(2, 3, circuit.gnd, model='MyDiode')
+circuit.R(1, 2, circuit.gnd, 1@u_kOhm)
+circuit.Diode(1, 1, 2, model='MyDiode')
 
 # print the circuit:
 print("\nThe Circuit/Netlist: \n", circuit)
