@@ -54,13 +54,13 @@ circuit.Diode(2, 3, circuit.gnd, model='MyDiode')
 # print the circuit:
 print("\nThe Circuit/Netlist: \n", circuit)
 
-# # create a simulator object (with parameters e.g temp)
-# simulator = circuit.simulator(temperature=25, nominal_temperature=25)
+# create a simulator object (with parameters e.g temp)
+simulator = circuit.simulator(temperature=25, nominal_temperature=25)
 
-# # print the circuit + simulator details:
-# print("The Simulator: \n", simulator)
+# print the circuit + simulator details:
+print("The Simulator: \n", simulator)
 
-# # run analysis
-# analysis = simulator.operating_point()
-# out_dict = format_output(analysis)
-# print(out_dict)
+# run analysis
+analysis = simulator.operating_point()
+out_dict = format_output(analysis)
+print(out_dict)
