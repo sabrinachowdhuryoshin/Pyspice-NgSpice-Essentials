@@ -45,3 +45,7 @@ fig = plt.figure()
 plt.plot(np.array(analysis["1"]), np.array(analysis["2"]))
 plt.xlabel("Input Voltage (node 1)")
 plt.xlabel("Input Voltage (node 2)")
+
+# save graph
+fig.savefig("Sim_Output.png", dpi=300)
+plt.close(fig)
