@@ -48,5 +48,5 @@ plt.xlabel("Input Voltage (node 2)")
 plt.show()
 
 # save graph
-fig.savefig("Sim_Output.png", dpi=300)
+fig.savefig("C:\Users\nx018023\OneDrive - Nexperia\Documents\GitHub\test_with_pyspice_ngspice\circuit_with_dc_sweep\Sim_Output.png", dpi=300)
 plt.close(fig)
