@@ -51,6 +51,9 @@ print("The Simulator: \n", simulator)
 
 # run analysis
 analysis = simulator.operating_point()
+out_dict = format_output(analysis)
+print(out_dict)
+
 
 
 
