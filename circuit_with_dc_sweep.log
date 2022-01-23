@@ -1,0 +1,21 @@
+Circuit: * C:\Users\nx018023\OneDrive - Nexperia\Documents\GitHub\test_with_pyspice_ngspice\circuit_with_dc_sweep.asc
+
+.OP point found by inspection.
+
+Date: Sun Jan 23 22:54:34 2022
+Total elapsed time: 0.086 seconds.
+
+tnom = 27
+temp = 27
+method = trap
+totiter = 107
+traniter = 0
+tranpoints = 0
+accept = 0
+rejected = 0
+matrix size = 4
+fillins = 0
+solver = Alternate
+Matrix Compiler1:       7 opcodes  0.0/[0.0]/0.0
+Matrix Compiler2: 272 bytes object code size  0.0/0.0/[0.0]
+
