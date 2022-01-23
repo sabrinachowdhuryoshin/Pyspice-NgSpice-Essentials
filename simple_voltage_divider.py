@@ -16,6 +16,6 @@ circuit = Circuit('Voltage Divider')
 
 # add components to the circuit
 circuit.V('input', 'in', circuit.gnd, 10@u_V)
-
+circuit.R(1, 'in', 'out', 9@u_kOhm)
 
 
