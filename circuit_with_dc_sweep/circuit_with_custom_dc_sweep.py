@@ -22,7 +22,7 @@ circuit = Circuit('Circuit with DC sweep')
 circuit.model('MyDiode', 'D', IS=4.352@u_nA, RS=0.6458@u_Ohm, BV=110@u_V, IBV=0.0001@u_V, N=1.906)
 
 # add components to the circuit
-circuit.V('input', 1, circuit.gnd, 10@u_V)
+circuit.V('i', 'imaginary', circuit.gnd, 10@u_V) # the voltage source i is connected between an imaginary node and gnd
 circuit.R(1, 2, circuit.gnd, 1@u_kOhm)
 circuit.Diode(1, 1, 2, model='MyDiode')
 
