@@ -19,3 +19,11 @@ circuit.V('input', 'in', circuit.gnd, 10@u_V)
 circuit.R(1, 'in', 'out', 9@u_kOhm)
 circuit.R(2, 'out', circuit.gnd, 1@u_kOhm)
 
+# create a simulator object (with parameters e.g temp)
+simulator = circuit.simulator(temperature=25, nominal_temperature=25)
+
+# print the circuit:
+print("The Circuit/Netlist: \n\n", circuit)
+
+exit()
+
