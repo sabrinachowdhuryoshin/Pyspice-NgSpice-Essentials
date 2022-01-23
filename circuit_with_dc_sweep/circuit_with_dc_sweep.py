@@ -3,7 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
-
+import os
 import PySpice
 import PySpice.Logging.Logging as Logging
 from PySpice.Spice.Netlist import Circuit
@@ -48,5 +48,8 @@ plt.xlabel("Input Voltage (node 2)")
 plt.show()
 
 # save graph
-fig.savefig("C:\Users\nx018023\OneDrive - Nexperia\Documents\GitHub\test_with_pyspice_ngspice\circuit_with_dc_sweep\Sim_Output.png", dpi=300)
+my_path = os.path.abspath(__file__) 
+
+# Figures out the absolute path for you in case your working directory moves around
+fig.savefig(my_path + '/Sim_Output.png', dpi=300)
 plt.close(fig)
