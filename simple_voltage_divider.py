@@ -6,3 +6,8 @@ import PySpice
 import PySpice.Logging.Logging as Logging
 from PySpice.Spice.Netlist import Circuit
 from PySpice.Unit import *
+
+logger = Logging.setup_logging()
+
+
+
