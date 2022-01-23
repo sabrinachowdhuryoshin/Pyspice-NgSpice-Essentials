@@ -25,8 +25,7 @@ circuit.model('MyDiode', 'D', IS=4.352@u_nA, RS=0.6458@u_Ohm, BV=110@u_V, IBV=0.
 circuit.V('i', 'imaginary', circuit.gnd, 10@u_V) # the voltage source i is connected between an imaginary node and gnd
 circuit.R(1, 2, circuit.gnd, 1@u_kOhm)
 circuit.Diode(1, 1, 2, model='MyDiode')
-
-circuit.B('BS', 1, circuit.gnd, v="v(imaginary)")
+circuit.B('BS', 1, circuit.gnd, v="v(imaginary)*2") #customize the sweep
 
 
 # print the circuit:
@@ -39,7 +38,7 @@ simulator = circuit.simulator(temperature=25, nominal_temperature=25)
 print("The Simulator: \n", simulator)
 
 # run DC sweep analysis
-analysis = simulator.dc(Vinput=slice(0, 5, 0.1))
+analysis = simulator.dc(Vi=slice(0, 5, 0.1))
 print("Node:", str(analysis["1"]), np.array(analysis["1"]))
 print("Node:", str(analysis["2"]), np.array(analysis["2"]))
 
