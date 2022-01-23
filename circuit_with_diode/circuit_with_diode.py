@@ -42,4 +42,11 @@ def format_output(analysis):
 circuit = Circuit('My Circuit')
 
 # define the 1N4148PH (signal diode)
-circuit.model('MyDiode', 'D', IS=4.352@u_nA, RS=0.6458@u_Ohm, BV=110@u_V)
+circuit.model('MyDiode', 'D', IS=4.352@u_nA, RS=0.6458@u_Ohm, BV=110@u_V), IBV=0.0001@u_V, N=1.906)
+
+# add components to the circuit
+circuit.V('input', 1, circuit.gnd, 10@u_V)
+circuit.R(1, 1, 2, 9@u_kOhm)
+circuit.R(2, 3, circuit.gnd, 9@u_kOhm)
+circuit.Diode(1, 2, 3, model='MyDiode')
+circuit.Diode(2, 3, circuit.gnd, model='MyDiode')
