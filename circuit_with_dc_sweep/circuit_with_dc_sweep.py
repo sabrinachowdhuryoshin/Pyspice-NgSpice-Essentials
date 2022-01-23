@@ -59,6 +59,11 @@ simulator = circuit.simulator(temperature=25, nominal_temperature=25)
 print("The Simulator: \n", simulator)
 
 # run analysis
-analysis = simulator.operating_point()
-out_dict = format_output(analysis)
-print(out_dict)
+analysis = simulator.dc()
+
+print("Node:", str(analysis["1"]), np.array(analysis["1"]))
+print("Node:", str(analysis["2"]), np.array(analysis["2"]))
+
+
+# out_dict = format_output(analysis)
+# print(out_dict)
