@@ -37,7 +37,7 @@ for val in data:
     loop += 1
 
 # v_seq is the piece wise linear string 
-circuit.B('BS', 1, circuit.gnd, v=v_seq") 
+circuit.B('BS', 1, circuit.gnd, v=v_seq) 
 
 # print the circuit:
 print("\nThe Circuit/Netlist: \n", circuit)
