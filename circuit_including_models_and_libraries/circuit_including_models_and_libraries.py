@@ -28,7 +28,7 @@ circuit.R(1, 2, circuit.gnd, 1@u_kOhm)
 
 # method 1: 
 # use circuit.include() from the pyspice functions
-circuit.include("1N4148.lib")
+circuit.include("/1N4148.lib")
 circuit.X('importDiode', '1N4148', 1, 2)
 
 # # method 2: 
@@ -37,7 +37,7 @@ circuit.X('importDiode', '1N4148', 1, 2)
 # circuit.raw_spice += new_line + os.linesep
 # circuit.X('importDiode', '1N4148', 1, 2)
 
-# # print the circuit:
+# print the circuit:
 # print("\nThe Circuit/Netlist: \n", circuit)
 
 # create a simulator object (with parameters e.g temp)
@@ -49,9 +49,9 @@ print("The Simulator: \n", simulator)
 # run DC sweep analysis
 analysis = simulator.dc(Vinput=slice(-4, 4, 0.01))  # slice = start:step:stop (inclusive)
 
-# # plot graph
-# fig = plt.figure()
-# plt.plot(np.array(analysis["1"]), np.array(analysis["2"]))
-# plt.xlabel("Input Voltage (node 1)")
-# plt.ylabel("Output Voltage (node 2)")
-# plt.show()
+# # # plot graph
+# # fig = plt.figure()
+# # plt.plot(np.array(analysis["1"]), np.array(analysis["2"]))
+# # plt.xlabel("Input Voltage (node 1)")
+# # plt.ylabel("Output Voltage (node 2)")
+# # plt.show()
