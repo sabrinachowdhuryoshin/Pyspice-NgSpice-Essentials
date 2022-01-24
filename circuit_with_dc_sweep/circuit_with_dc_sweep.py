@@ -37,8 +37,8 @@ print("The Simulator: \n", simulator)
 
 # run DC sweep analysis
 analysis = simulator.dc(Vinput=slice(0, 5, 0.1))
-print("Node:", str(analysis["1"]), np.array(analysis["1"]))
-print("Node:", str(analysis["2"]), np.array(analysis["2"]))
+# print("Node:", str(analysis["1"]), np.array(analysis["1"]))
+# print("Node:", str(analysis["2"]), np.array(analysis["2"]))
 
 # plot graph
 fig = plt.figure()

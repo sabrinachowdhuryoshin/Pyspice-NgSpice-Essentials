@@ -44,9 +44,7 @@ simulator = circuit.simulator(temperature=25, nominal_temperature=25)
 print("The Simulator: \n", simulator)
 
 # run DC sweep analysis
-analysis = simulator.dc(Vinput=slice(-4, 4, 0.01))
-print("Node:", str(analysis["1"]), np.array(analysis["1"]))
-print("Node:", str(analysis["2"]), np.array(analysis["2"]))
+analysis = simulator.dc(Vinput=slice(-4, 4, 0.01))  # slice = start:step:stop (inclusive)
 
 # plot graph
 fig = plt.figure()
