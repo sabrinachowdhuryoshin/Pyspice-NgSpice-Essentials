@@ -25,7 +25,19 @@ circuit.model('MyDiode', 'D', IS=4.352@u_nA, RS=0.6458@u_Ohm, BV=110@u_V, IBV=0.
 circuit.V('i', 'imaginary', circuit.gnd, 10@u_V) # the voltage source i is connected between an imaginary node and gnd
 circuit.R(1, 2, circuit.gnd, 1@u_kOhm)
 circuit.Diode(1, 1, 2, model='MyDiode')
-circuit.B('BS', 1, circuit.gnd, v="v(imaginary)*2") #customize the sweep
+
+data = [0,1,5,-2,-3,2]
+v_seq = "pwl(v(imaginary),"
+loop = 1
+for val in data:
+    if loop == len(data):
+        v_seq += ' %d,%.3f ' % (loop,val)
+    else:
+        v_seq +=  '%d,%.3f ' % (loop,val)
+    loop += 1
+
+
+circuit.B('BS', 1, circuit.gnd, v=v_seq") # v_seq is the piece wise linear function 
 
 
 # print the circuit:
@@ -38,7 +50,7 @@ simulator = circuit.simulator(temperature=25, nominal_temperature=25)
 print("The Simulator: \n", simulator)
 
 # run DC sweep analysis
-analysis = simulator.dc(Vi=slice(0, 5, 0.1))
+analysis = simulator.dc(Vi=slice(1, len(data), 1))
 print("Node:", str(analysis["1"]), np.array(analysis["1"]))
 print("Node:", str(analysis["2"]), np.array(analysis["2"]))
 
