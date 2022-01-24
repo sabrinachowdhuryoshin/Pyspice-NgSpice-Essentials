@@ -3,6 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
+import os
 
 import PySpice
 import PySpice.Logging.Logging as Logging
@@ -30,6 +31,8 @@ circuit.R(1, 2, circuit.gnd, 1@u_kOhm)
 # method 1: 
 # use circuit.include() from the pyspice functions
 new_line = ".include lib//1N4148.lib"
+circuit.raw_spice += new_line + os.linesep
+circuit.X('importDiode', '1N4148', 1, 2)
 
 
 
