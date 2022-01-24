@@ -44,7 +44,7 @@ print("Node:", str(analysis["2"]), np.array(analysis["2"]))
 fig = plt.figure()
 plt.plot(np.array(analysis["1"]), np.array(analysis["2"]))
 plt.xlabel("Input Voltage (node 1)")
-plt.xlabel("Input Voltage (node 2)")
+plt.ylabel("Output Voltage (node 2)")
 plt.show()
 
 # save graph
