@@ -34,9 +34,6 @@ new_line = ".include lib//1N4148.lib"
 circuit.raw_spice += new_line + os.linesep
 circuit.X('importDiode', '1N4148', 1, 2)
 
-
-
-
 # print the circuit:
 print("\nThe Circuit/Netlist: \n", circuit)
 
@@ -46,7 +43,14 @@ simulator = circuit.simulator(temperature=25, nominal_temperature=25)
 # print the circuit + simulator details:
 print("The Simulator: \n", simulator)
 
-# run analysis
-analysis = simulator.operating_point()
-out_dict = format_output(analysis)
-print(out_dict)
+# run DC sweep analysis
+analysis = simulator.dc(Vinput=slice(-4, 4, 0.01))
+print("Node:", str(analysis["1"]), np.array(analysis["1"]))
+print("Node:", str(analysis["2"]), np.array(analysis["2"]))
+
+# plot graph
+fig = plt.figure()
+plt.plot(np.array(analysis["1"]), np.array(analysis["2"]))
+plt.xlabel("Input Voltage (node 1)")
+plt.ylabel("Output Voltage (node 2)")
+plt.show()
