@@ -36,9 +36,8 @@ for val in data:
         v_seq +=  '%d,%.3f ' % (loop,val)
     loop += 1
 
-
-circuit.B('BS', 1, circuit.gnd, v=v_seq") # v_seq is the piece wise linear function 
-
+# v_seq is the piece wise linear string 
+circuit.B('BS', 1, circuit.gnd, v=v_seq") 
 
 # print the circuit:
 print("\nThe Circuit/Netlist: \n", circuit)
