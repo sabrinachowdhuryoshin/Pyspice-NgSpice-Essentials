@@ -11,29 +11,6 @@ from PySpice.Unit import *
 
 logger = Logging.setup_logging()
 
-# function
-
-def format_output(analysis):
-    '''
-    Gets dictionary containing SPICE sim values.
-    The dictionary is created by pairing each of the nodes to its corresponding 
-    output voltage value array. 
-    This provides a more manageable format.
-    '''
-    # create dictionary
-    sim_res_dict = {}
-
-    # loop through each nodes
-    for node in analysis.nodes.values():
-
-        # extract node name
-        data_label = "%s" % str(node)
-
-        # save node value/ array of values
-        sim_res_dict[data_label] = np.array(node)
-
-    return sim_res_dict
-
 ############################################################
 # # Make a Circuit with a Diode # #
 ############################################################
@@ -41,15 +18,21 @@ def format_output(analysis):
 # create the circuit
 circuit = Circuit('Circuit with a Diode')
 
-# define the 1N4148PH (signal diode)
-circuit.model('MyDiode', 'D', IS=4.352@u_nA, RS=0.6458@u_Ohm, BV=110@u_V, IBV=0.0001@u_V, N=1.906)
-
 # add components to the circuit
 circuit.V('input', 1, circuit.gnd, 10@u_V)
-circuit.R(1, 1, 2, 9@u_kOhm)
-circuit.R(2, 3, circuit.gnd, 1@u_kOhm)
-circuit.Diode(1, 2, 3, model='MyDiode')
-circuit.Diode(2, 3, circuit.gnd, model='MyDiode')
+circuit.R(1, 2, circuit.gnd, 1@u_kOhm)
+
+# # method 0: locally defined
+# # define the 1N4148 (signal diode)
+# circuit.model('MyDiode', 'D', IS=4.352@u_nA, RS=0.6458@u_Ohm, BV=110@u_V, IBV=0.0001@u_V, N=1.906)
+# circuit.Diode(1, 1, 2, model='MyDiode')
+
+# method 1: 
+# use circuit.include() from the pyspice functions
+new_line = ".include lib//1N4148.lib"
+
+
+
 
 # print the circuit:
 print("\nThe Circuit/Netlist: \n", circuit)
