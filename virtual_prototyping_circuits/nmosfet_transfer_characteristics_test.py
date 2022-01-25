@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import matplotlib.pyplot as plt
 
 import PySpice.Logging.Logging as Logging
@@ -11,7 +13,8 @@ from PySpice.Unit import *
 
 libraries_path = find_libraries()
 spice_library = SpiceLibrary(libraries_path)
-print(spice_library) # debug
+
+        
 # ############################################################
 # # # Make a Circuit with nmosfet # #
 # ############################################################
