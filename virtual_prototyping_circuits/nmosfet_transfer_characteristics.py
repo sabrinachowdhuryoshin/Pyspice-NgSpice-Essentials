@@ -17,7 +17,7 @@ spice_library = SpiceLibrary(libraries_path)
 ############################################################
 
 circuit = Circuit('NMOS Transistor')
-circuit.include(spice_library['IPP60R190E6_L0'])
+circuit.include(spice_library['DMG3420U'])
 
 # Define the DC supply voltage value
 Vdd = 1.1
@@ -26,7 +26,7 @@ Vdd = 1.1
 Vgate = circuit.V('gate', 'gatenode', circuit.gnd, 0@u_V)
 Vdrain = circuit.V('drain', 'vdd', circuit.gnd, u_V(Vdd))
 # M <name> <drain node> <gate node> <source node> <bulk/substrate node>
-circuit.MOSFET(1, 'vdd', 'gatenode', circuit.gnd, circuit.gnd, model='IPP60R190E6_L0')
+circuit.MOSFET(1, 'vdd', 'gatenode', circuit.gnd, circuit.gnd, model='DMG3420U')
 
 # create a simulator object (with parameters e.g temp)
 simulator = circuit.simulator(temperature=25, nominal_temperature=25)
