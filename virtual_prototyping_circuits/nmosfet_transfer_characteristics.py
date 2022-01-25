@@ -12,9 +12,9 @@ from PySpice.Unit import *
 libraries_path = find_libraries()
 spice_library = SpiceLibrary(libraries_path)
 
-############################################################
-# # Make a Circuit with nmosfet # #
-############################################################
+# ############################################################
+# # # Make a Circuit with nmosfet # #
+# ############################################################
 
 circuit = Circuit('NMOS Transistor')
 circuit.include(spice_library['DMG3420U'])
@@ -30,7 +30,7 @@ circuit.MOSFET(1, 'vdd', 'gatenode', circuit.gnd, circuit.gnd, model='DMG3420U')
 
 # create a simulator object (with parameters e.g temp)
 simulator = circuit.simulator(temperature=25, nominal_temperature=25)
-
+print(simulator)
 # run DC sweep analysis
 analysis = simulator.dc(Vgate=slice(0, Vdd, .01))
 
