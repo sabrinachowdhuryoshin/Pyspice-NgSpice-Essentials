@@ -26,7 +26,7 @@ Vdd = 1.1
 Vgate = circuit.V('gate', 'gatenode', circuit.gnd, 0@u_V)
 Vdrain = circuit.V('drain', 'vdd', circuit.gnd, u_V(Vdd))
 # M <name> <drain node> <gate node> <source node> <bulk/substrate node>
-circuit.MOSFET(1, 'vdd', 'gatenode', circuit.gnd, circuit.gnd, model='ptm65nm_nmos')
+circuit.MOSFET(1, 'vdd', 'gatenode', circuit.gnd, circuit.gnd, model='BUK7S1R0-40H')
 
 # create a simulator object (with parameters e.g temp)
 simulator = circuit.simulator(temperature=25, nominal_temperature=25)
