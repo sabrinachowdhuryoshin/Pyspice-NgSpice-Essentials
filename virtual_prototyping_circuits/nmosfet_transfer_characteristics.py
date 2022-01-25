@@ -20,7 +20,7 @@ spice_library = SpiceLibrary(libraries_path)
 
 
 circuit = Circuit('NMOS Transistor')
-circuit.include(spice_library['ptm65nm_nmos'])
+circuit.include(spice_library['BUK7S1R0-40H'])
 
 # Define the DC supply voltage value
 Vdd = 1.1
