@@ -1,0 +1,34 @@
+.SUBCKT IPP60R190E6_L0  drain  gate  source
+
+Lg     gate  g1    4n
+Ld     drain d1    2.5n
+Ls     source s1   2.5n
+Rs      s1    s2   2m
+
+Rg     g1    g2     6
+M1      d2    g2    s2    s2    DMOS    L=1u   W=1u
+.MODEL DMOS NMOS ( KP= 15.989  VTO=3.85  THETA=0  VMAX=1.5e5  ETA=0  LEVEL=3)
+Rd     d2    d1a    0.135 TC=15m
+.MODEL MVDR NMOS (KP=48.1 VTO=-1   LAMBDA=0.2)
+Mr d1 d2a d1a d1a MVDR W=1u L=1u
+Rx d2a d1a 1m
+Cds1 s2 d2 41.9p
+Dbd     s2    d2    Dbt
+.MODEL     Dbt    D(BV=600   M=0.9  CJO=16.62n  VJ=0.5V)
+Dbody   s2   21    DBODY
+.MODEL DBODY  D(IS=3.2p  N=1.08  RS=10u  EG=1.12  TT=400n)
+Rdiode  d1  21    3.78m TC=6m
+
+.MODEL   sw    NMOS(VTO=0  KP=10   LEVEL=1)
+Maux      g2   c    a    a   sw
+Maux2     b    d    g2    g2   sw
+Eaux      c    a    d2    g2   1
+Eaux2     d    g2   d2    g2   -1
+Cox       b    d2   2.88n
+.MODEL     DGD    D(M=0.88   CJO=2.88n   VJ=0.5)
+Rpar      b    d2   1Meg
+Dgd       a    d2   DGD
+Rpar2     d2   a    10Meg
+Cgs     g2    s2    1.4n
+
+.ENDS  IPP60R190E6_L0
