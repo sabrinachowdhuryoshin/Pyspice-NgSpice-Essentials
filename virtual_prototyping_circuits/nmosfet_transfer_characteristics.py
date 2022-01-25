@@ -31,6 +31,7 @@ circuit.MOSFET(1, 'vdd', 'gatenode', circuit.gnd, circuit.gnd, model='DMG3420U')
 # create a simulator object (with parameters e.g temp)
 simulator = circuit.simulator(temperature=25, nominal_temperature=25)
 print(simulator)
+
 # run DC sweep analysis
 analysis = simulator.dc(Vgate=slice(0, Vdd, .01))
 
