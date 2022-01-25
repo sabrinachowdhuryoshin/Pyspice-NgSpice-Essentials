@@ -1,0 +1,149 @@
+.SUBCKT BUK7S1R0-40H Drain Gate Source Tj Tcase
+
+.param AA = 12.87
+.param VTH0 = 4.214
+.param KP0 = 51.04
+.param SS0 = 105.4m
+.param C = 1.006
+.param RD0 = 83.83
+.param KG0 = 5.128
+.param G_CURVE0 = 525.8m
+.param VTHG0 = 3.837
+.param DTKP = -367.9m
+.param DTVT = -1.633m
+.param DTSS = 1.686
+.param DTRD = 1.213
+.param DTKG = -2.100
+.param DTGD = -444.1p
+.param DI0 = 44.60
+.param DI1 = 1.510K
+.param DI2 = 1.320K
+.param DTDIO2 = -5.125
+.param DTDIO0 = 89.83m
+.param DTDIO1 = -4.995
+.param B1 = -43.89
+.param B2 = 3.467
+.param CDG0 = 135.5p
+.param CDGMAX = 607.3p
+.param CDGMIN = 19.12p
+.param CJ0 = 3.663n
+.param FC = 600.0m
+.param MJ = 612.0m
+.param VJ = 23.97m
+.param CGSVAL = 559.8p
+.param BV0 = 43.13
+.param DTBV = 38.58m
+.param IS0 = 1.757p
+.param DTIS = 69.16m
+.param LS = 350.0p
+.param QD = 7.500n
+.param BE_A = 1.000
+
+**The parameters are not taken from the .mps file. Please modify them manually!
+
+.param Rpackage = 0.14m
+.param FREQROLL = 1000000000.0
+.param Rlg = {Lg*FREQROLL*6.28}
+.param Rld = {Ld*FREQROLL*6.28}
+.param Rls = {Ls*FREQROLL*6.28}
+.param LG = 0.532E-9
+.param LD = 0.004E-9
+.param pi = 3.14159265359
+.param TNOM = 298
+.param Rth_ext = 50
+.param Cth_ext = 1n
+.param RTH0 = 0.0140966
+.param RTH1 = 0.1218
+.param RTH2 = 0.365224
+.param RTH3 = 0.00157493
+.param RTH4 = 0.00734718
+.param CTH0 = 0.000200893
+.param CTH1 = 0.00211362
+.param CTH2 = 0.02099
+.param CTH3 = 238.025
+.param CTH4 = 6.71043
+.param RSNUB = 3.5 
+.param CSNUB = 3E-10
+.param LB = -1.7
+.param LA = 0.004
+.param A = 1.0
+.param ALPHA = 4.44e-07
+.param LC = 0.5974
+.param DTVTG = -0.0117496385164
+.param CDGMAX_N= (-18.372*AA + CDGMAX)*1e-12
+.param C1 = {CDGMAX_N - CDG0}
+.param D1 = {CDGMIN - CDG0}
+.param F1 = {VJ / (1 - MJ) * ( 1 - PWR((1 - FC),1-MJ))}
+.param F2 = {PWR(1-FC, 1+MJ)}
+.param F3 = {1 - FC*(1+MJ)}
+
+.func Qdglow(vd,vg) {((CDGMAX-CDG0)/(B1)/2 * PWR((vd-vg),2) + CDG0*(vd-vg) - CDGMAX*(vd-vg))/2*TANH(1000000*((vd-vg)-B1)) + ((CDGMAX-CDG0)/(B1)/2 * PWR((vd-vg),2) + CDG0*(vd-vg) + CDGMAX*(vd-vg))/2 }
+.func Qdghigh(vd,vg) {-D1/pi /B2 *ln( PWR(B2*(vd-vg),2) + 1) + 2*D1*(vd-vg)/pi* atan(B2*(vd-vg))+CDG0*(vd-vg) + 1.0e-12}
+.func Qrss_eq(vd,vg) {(Qdghigh(vd,vg)-Qdglow(vd,vg))/2.0 * tanh(10.0*(vd-vg)) + (Qdghigh(vd,vg) + Qdglow(vd,vg))/2.0}
+.func Qdslow(vs,vd) {(CJ0 * VJ)/( 1-MJ )*( 1 - PWR(( 1 - (vs-vd)/VJ),1-MJ)  )} 
+.func Qdshigh(vs,vd) {CJ0 * ( F1 + 1/F2 * ( F3 * ( (vs-vd)- FC * VJ ) +  MJ/(2*VJ) * ( PWR((vs-vd),2) - PWR(FC,2)*PWR(VJ,2) )  )  )}
+.func Qds_eq(vs,vd) {(Qdshigh(vs,vd)-Qdslow(vs,vd))/2.0 * tanh(10.0*(vs-vd-(FC*VJ))) + (Qdshigh(vs,vd) + Qdslow(vs,vd))/2.0}
+.func Qgs_eq(vg,vs) {CGSVAL  * (vg-vs) + 1p}
+ 
+.func TSCALE(tj) {( (tj+1E-12) / TNOM )+ 1E-12}
+.func lambdamosfet(vg,vs) {((TANH(100000*( (vg-vs) + LB/LA  )) + 1)/2) * (LA*(vg-vs) +LB) }
+.func KP(tj) {KP0*PWR(TSCALE(tj), DTKP)}
+.func VTH(tj,vd,vs) {VTH0 + DTVT*(tj-TNOM) + BE_A*(vd-vs)*(-TANH(1000*(vd-vs))+1)/2}
+.func VTH_G(tj,vd,vs) {VTHG0 + DTVTG*(tj-TNOM) +  BE_A*(vd-vs)*(-TANH(1000*(vd-vs))+1)/2}
+.func G_CURVE(tj) {G_CURVE0*PWR(TSCALE(tj) , DTGD)}
+.func SS(tj) {SS0*PWR(TSCALE(tj),DTSS)}
+.func RD(tj) {RD0 * PWR(TSCALE(tj), -DTRD)}
+.func KG(tj) {KG0 * PWR(TSCALE(tj), DTKG)}
+.func BVSHIFT(tj) {BV0 + DTBV * (tj-TNOM)}
+.func isfunction(tj,vd,vs) { IS0 * (vd-vs)* PWR(2, ( (tj-TNOM) *DTIS)) }
+.func BV(tj,vd,vs) {(PWR((vd-vs)-BVSHIFT(tj),4))*(TANH(400*( (vd-vs)-BVSHIFT(tj)))+1)}
+.func DI0T(tj) {DI0+DTDIO0*(tj-TNOM)}
+.func DI1T(tj) {DI1+DTDIO1*(tj-TNOM)}
+.func DI2T(tj) {DI2+DTDIO2*(tj-TNOM)}
+.func isat(tj,vg,vd,vs) {KP(tj)*PWR(SS(tj) ,C)*PWR(LN( 1 + EXP(((vg-vs)-VTH(tj,vd,vs) )/SS(tj) )), C)}
+.func glin(tj,vg,vd,vs) {MAX(KG(tj)*((vg-vs)-VTH_G(tj,vd,vs)  ) + RD(tj) ,0)}
+.func Gdson(tj,vg,vd,vs) {((TANH(G_CURVE(tj)*((vg-vs)-VTH_G(tj,vd,vs) ))+1)/2 * glin(tj,vg,vd,vs)) * (TANH(10*((vg-vs)-2))+1)/2}
+.func Imos(tj,vg,vd,vs) {isat(tj,vg,vd,vs)*TANH(Gdson(tj,vg,vd,vs) * ((vd-vs)/(1+ALPHA*(vd-vs)))/((1e-12)+ isat(tj,vg,vd,vs)*(1+lambdamosfet(vg,vs) *((vd-vs)))))*(1+lambdamosfet(vg,vs) *((vd-vs)))}
+.func Iddc(tj,vd,vs) {-1*(DI0T(tj) * LN( 1 + EXP( DI1T(tj)/DI0T(tj)*(-1*min((vd-vs),0) - DI2T(tj)/DI1T(tj))))) + DI0T(tj)* EXP(DI1T(tj)/DI0T(tj)*(-DI2T(tj)/DI1T(tj))) }
+ 
+Lg   Gate  gx {Lg}
+Rlg  Gate  gx {Rlg}
+Vg_i   gx gi  0
+Ld   Drain   dx {Ld}
+Rld  Drain   dx {Rld}
+Vd_i   dx di 0
+Ls   Source   sx {Ls}
+Rls  Source   sx {Rls}
+Vs_i  sx si 0
+ 
+Rsnubber dx snubnode {RSNUB}
+Csnubber snubnode sx {CSNUB}
+Eds dscur1 dscur2 value = {AA* Imos(V(Tj1),V(Gate),V(Drain),V(Source))  +  AA* Iddc(V(Tj1),V(Drain),V(Source)) + AA* QD * ddt(Iddc(V(Tj1),V(Drain),V(Source))) - AA* ddt(Qds_eq(V(Source),V(Drain)))  + AA* isfunction(V(Tj1),V(Drain),V(Source)) + AA*BV(V(Tj1),V(Drain),V(Source))}
+Rds1 dscur2 0 1
+Egs gscur1 gscur2 value = {AA*ddt(Qgs_eq(V(Gate),V(Source)))}
+Rgs1 gscur2 0 1
+Edg dgcur1 dgcur2 value = {AA*ddt(Qrss_eq(V(Drain),V(Gate)))}
+Rdg1 dgcur2 0 1
+Gds di si dscur1 dscur2 1
+Gdg di gi dgcur1 dgcur2 1
+Ggs gi si gscur1 gscur2 1
+ETj  Tj1  0  value={limit((v(Tj)+273),210,600)}
+G_th 0 Tj value={v(di,si)*V(dscur1,dscur2)}
+Rth0 Tj T1 {RTH0}
+Rth1 T1 T2 {RTH1}
+Rth2 T2 T3 {RTH2}
+Rth3 T3 T4 {RTH3}
+Rth4 T4 Tcase {RTH4}
+Rth_ext Tcase 0 {RTH_ext}
+Cdummy0 Tcase Tj 1E-20 IC=0
+Cth0 Tj 0 {CTH0}
+Cdummy1 Tcase T1 1E-20 IC=0
+Cth1 T1  0 {CTH1}
+Cdummy2 Tcase T2 1E-20 IC=0
+Cth2 T2  0 {CTH2}
+Cdummy3 Tcase T3 1E-20 IC=0
+Cth3 T3  0 {CTH3}
+Cdummy4 Tcase T4 1E-20 IC=0
+Cth4 T4  0 {CTH4}
+Rstability gi 0 10G
+.ends
