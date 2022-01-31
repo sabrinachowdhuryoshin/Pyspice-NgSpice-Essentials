@@ -44,21 +44,21 @@ Vgate = circuit.V('gate', 'gatenode', circuit.gnd, 0@u_V)
 Vdrain = circuit.V('drain', 'vdd', circuit.gnd, u_V(Vdd))
 # M <name> <drain node> <gate node> <source node> <bulk/substrate node>
 circuit.MOSFET(1, 'vdd', 'gatenode', circuit.gnd, circuit.gnd, model='DMG3420U')
-
-#r# We plot the characteristics :math:`Id = f(Vgs)` using a DC sweep simulation.
+print(circuit)
+# #r# We plot the characteristics :math:`Id = f(Vgs)` using a DC sweep simulation.
 
 simulator = circuit.simulator(temperature=25, nominal_temperature=25)
-analysis = simulator.dc(Vgate=slice(0, Vdd, .01))
+# analysis = simulator.dc(Vgate=slice(0, Vdd, .01))
 
-figure, ax = plt.subplots(figsize=(20, 10))
+# figure, ax = plt.subplots(figsize=(20, 10))
 
-ax.plot(analysis['gatenode'], u_mA(-analysis.Vdrain))
-ax.legend('NMOS characteristic')
-ax.grid()
-ax.set_xlabel('Vgs [V]')
-ax.set_ylabel('Id [mA]')
+# ax.plot(analysis['gatenode'], u_mA(-analysis.Vdrain))
+# ax.legend('NMOS characteristic')
+# ax.grid()
+# ax.set_xlabel('Vgs [V]')
+# ax.set_ylabel('Id [mA]')
 
-plt.tight_layout()
-plt.show()
+# plt.tight_layout()
+# plt.show()
 
 #f# save_figure('figure', 'transistor-nmos-plot.png')
